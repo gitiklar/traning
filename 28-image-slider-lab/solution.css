@@ -3,3 +3,27 @@
 * Write your CSS here to have only one visible image each time
 * play with the position/top/left/right to determine which image is shown
 */
+
+body {
+  padding: 0%;
+  margin: 0%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-slider {
+  width: 400px;
+  height: 301px;
+  overflow: hidden;
+  position: relative;
+}
+
+.images {
+  width: 1000000px;
+  display: flex;
+  position: absolute;
+  left: -400px;
+}
