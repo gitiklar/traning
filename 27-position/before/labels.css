@@ -1,0 +1,15 @@
+label {
+  position: relative;
+}
+
+span {
+  position: absolute;
+  background: orange;
+  color: white;
+  width: 100%;
+}
+
+input {
+  border: 1px solid orange;
+  padding-top: 20px;
+}
