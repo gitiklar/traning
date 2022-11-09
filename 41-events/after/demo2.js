@@ -1,18 +1,10 @@
-const inputs = document.querySelectorAll('input');
+const inputs = document.querySelectorAll("input");
+const container = document.querySelector("div");
 
 function writeToAllInputs(text) {
-    for (let inp of inputs) {
-        inp.value = text;
-    }
+  for (let inp of inputs) {
+    inp.value = text;
+  }
 }
 
-
-function handleTextChangeInBox(event) {
-    writeToAllInputs(event.target.value);
-}
-
-for (let inp of inputs) {
-    inp.addEventListener('input', handleTextChangeInBox);
-}
-
-writeToAllInputs('hello!');
+container.addEventListener("input", (e) => writeToAllInputs(e.target.value));
