@@ -3,10 +3,9 @@ import "./App.scss";
 import Person from "./06-props/person";
 import Counter from "./07/counter";
 import Colors from "./07/colors";
-import { MyApp } from "./15/main";
+import { MyApp } from "./17/main";
 
 function App() {
-
   return (
     <div>
       <MyApp />
