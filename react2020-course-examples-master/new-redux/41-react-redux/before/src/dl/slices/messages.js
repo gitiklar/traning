@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   messages: [
     { id: 0, from: 'ynon', text: 'Hello Everyone' },
+    { id: 1, from: 'user1', text: 'Hello World' },
+    { id: 2, from: 'user2', text: 'Nice to see you' },
   ],
 }
 
