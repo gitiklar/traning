@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
+import { getUserName } from "../dl/selectors";
+
 export default function Banner() {
-  const user = useSelector((state) => state.account.name);
+  const user = useSelector(getUserName);
   const roomId = useSelector((state) => state.rooms.activeRoomId);
 
   return (

@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
+import { getUserName } from "../dl/selectors";
 import { setUserName } from "../dl/slices/account";
 
 export default function Header() {
-  const name = useSelector((state) => state.account.name);
+  const name = useSelector(getUserName);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
