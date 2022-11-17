@@ -25,3 +25,5 @@ console.assert(state.messages[1] === newState.messages[1]);
 console.assert(state.messages[2] !== newState.messages[2]);
 console.assert(state.messages[2].from == newState.messages[2].from);
 console.assert(state.messages[2].text != newState.messages[2].text);
+
+export default "";

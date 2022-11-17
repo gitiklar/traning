@@ -3,14 +3,10 @@ import "./App.scss";
 import Person from "./06-props/person";
 import Counter from "./07/counter";
 import Colors from "./07/colors";
-import { MyApp } from "./35/main";
+import * as tmp from "./37/main";
 
 function App() {
-  return (
-    <div className="containerDiv">
-      <MyApp />
-    </div>
-  );
+  return <div className="containerDiv"></div>;
 }
 
 export default App;
