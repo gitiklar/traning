@@ -1,30 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { joinRoom } from "../actions";
+import { setUserName } from "./account";
 
 const initialState = {
-  activeRoomId: 0,
+  activeRoomId: 5,
   rooms: [
-    { id: 0, name: 'Loby' },
-    { id: 1, name: 'JavaScript Chats' },
+    { id: 0, name: "Loby" },
+    { id: 1, name: "JavaScript Chats" },
   ],
-}
+};
 
 export const slice = createSlice({
-  name: 'rooms',
+  name: "rooms",
   initialState,
   reducers: {
+    createRoom(state, action) {
+      state.rooms.push(action.payload);
+    },
     enterRoom(state, action) {
-      const { room } = action.payload;
-      state.activeRoomId = room.id;
+      state.activeRoomId = action.payload;
     },
     leaveRoom(state) {
       state.activeRoomId = 0;
     },
   },
+  extraReducers: {
+    [setUserName]: (state) => {
+      state.activeRoomId = 0;
+    },
+    ["rooms/joinRoom/fulfilled"]: (state, action) => {
+      console.log("full", action);
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const { enterRoom, leaveRoom } = slice.actions
-
+export const { enterRoom, leaveRoom, createRoom } = slice.actions;
+window.enterRoom = enterRoom;
 export default slice.reducer;
-
-

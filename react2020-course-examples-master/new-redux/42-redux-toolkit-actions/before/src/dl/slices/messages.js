@@ -1,23 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
+import { newMessage } from "../actions";
 
 const initialState = {
-  messages: [
-    { id: 0, from: 'ynon', text: 'Hello Everyone' },
-  ],
-}
+  messages: [{ id: 0, from: "ynon", text: "Hello Everyone" }],
+};
 
 export const slice = createSlice({
-  name: 'messages',
+  name: "messages",
   initialState,
-  reducers: {
-    newMessage(state, action) {
+  extraReducers: {
+    [newMessage]: (state, action) => {
       state.messages.push(action.payload);
-    }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { newMessage } = slice.actions
 
 export default slice.reducer;
-
