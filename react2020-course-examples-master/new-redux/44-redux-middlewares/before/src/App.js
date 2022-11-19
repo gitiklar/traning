@@ -5,12 +5,14 @@ import MessagesList from "./ui/MessagesList";
 import { AddMessage } from "./ui/AddMessage";
 import MessagesCount from "./ui/MessagesCount";
 import Freeze from "./ui/Freeze";
+import FirebaseListener from "./ui/FirebaseListener";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <main>
+        <FirebaseListener />
         <Freeze />
         <Banner />
         <AddMessage />

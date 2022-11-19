@@ -1,13 +1,22 @@
 import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import app from "../firebase";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getFirestore,
+} from "firebase/firestore";
 import { createRoom, enterRoom } from "./slices/rooms";
 
-export const newMessage = createAction("messages/newMessage", (from, text) => ({
-  payload: {
-    id: nanoid(),
+export const newMessage = (from, text) => {
+  const db = getFirestore(app);
+  addDoc(collection(db, "messages"), {
     from,
     text,
-  },
-}));
+    id: nanoid(),
+    createdAt: serverTimestamp(),
+  });
+};
 
 const goToServer = () =>
   new Promise((resolve, reject) => {
