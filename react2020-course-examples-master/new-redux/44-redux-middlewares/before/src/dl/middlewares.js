@@ -1,4 +1,4 @@
-import { actions } from "./slices/freeze";
+import { addActionToList, clear } from "./slices/freeze";
 
 export const freezeMiddleware =
   ({ dispatch, getState }) =>
@@ -10,7 +10,7 @@ export const freezeMiddleware =
         for (let action of getState().freeze.actions) {
           dispatch(action);
         }
-        dispatch(actions.clear());
+        dispatch(clear());
       }
     } else if (
       action.type === "freeze/addActionToList" ||
@@ -22,7 +22,7 @@ export const freezeMiddleware =
       if (!isFrozen) {
         next(action);
       } else {
-        dispatch(actions.addActionToList(action));
+        dispatch(addActionToList(action));
       }
     }
   };

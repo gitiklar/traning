@@ -1,62 +1,40 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { setUserName } from './account';
-
-async function sleep(ms) {
-  return new Promise(done => {
-    setTimeout(done, ms);
-  });
-}
-
-async function enterRoomActionCreator(roomId, { getState, dispatch }) {
-  const rooms = getState().rooms.rooms;
-  const nextRoom = rooms.find(r => r.id === roomId);
-  if (nextRoom) {
-    return Promise.resolve(nextRoom);
-  } else {
-    await sleep(1000);
-    return {
-      id: roomId,
-      name: `Room ${roomId}`
-    };
-  }
-}
-
-export const enterRoom = createAsyncThunk('rooms/enterRoom', enterRoomActionCreator);
+import { createSlice } from "@reduxjs/toolkit";
+import { joinRoom } from "../actions";
+import { setUserName } from "./account";
 
 const initialState = {
-  activeRoomId: 1,
+  activeRoomId: 5,
   rooms: [
-    { id: 0, name: 'Loby' },
-    { id: 1, name: 'JavaScript Chats' },
+    { id: 0, name: "Loby" },
+    { id: 1, name: "JavaScript Chats" },
   ],
-}
+};
 
 export const slice = createSlice({
-  name: 'rooms',
+  name: "rooms",
   initialState,
   reducers: {
+    createRoom(state, action) {
+      state.rooms.push(action.payload);
+    },
+    enterRoom(state, action) {
+      state.activeRoomId = action.payload;
+    },
     leaveRoom(state) {
       state.activeRoomId = 0;
     },
   },
   extraReducers: {
-    [enterRoom.fulfilled]: (state, action) => {
-      const newRoom = action.payload;
-      if (!state.rooms.find(r => r.id === newRoom.id)) {
-        // room is not in my list
-        state.rooms.push(newRoom);
-      }
-      state.activeRoomId = newRoom.id;
-    },
-    [setUserName]: (state, _action) => {
+    [setUserName]: (state) => {
       state.activeRoomId = 0;
-    }
-  }
+    },
+    ["rooms/joinRoom/fulfilled"]: (state, action) => {
+      console.log("full", action);
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const { leaveRoom } = slice.actions
-
-export default slice.reducer;
-
+export const { enterRoom, leaveRoom, createRoom } = slice.actions;
 window.enterRoom = enterRoom;
+export default slice.reducer;

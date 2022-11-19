@@ -21,6 +21,5 @@ const slice = createSlice({
   },
 });
 
-export const actions = slice.actions;
-window.actions = actions;
+export const { setFrozen, addActionToList, clear } = slice.actions;
 export default slice.reducer;
