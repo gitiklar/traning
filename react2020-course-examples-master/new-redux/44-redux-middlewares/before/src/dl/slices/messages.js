@@ -8,11 +8,6 @@ export const slice = createSlice({
   name: "messages",
   initialState,
   reducers: {
-    deleteMessage(state, action) {
-      state.messages = state.messages.filter(
-        (item) => item.id !== action.payload
-      );
-    },
     updateMessages(state, action) {
       state.messages = action.payload;
     },
@@ -20,6 +15,5 @@ export const slice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { deleteMessage, updateMessages } = slice.actions;
-window.deleteMessage = deleteMessage;
+export const { updateMessages } = slice.actions;
 export default slice.reducer;
