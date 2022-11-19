@@ -8,6 +8,14 @@ import {
 } from "firebase/firestore";
 import { createRoom, enterRoom } from "./slices/rooms";
 
+export const setUserName = createAction(
+  "account/setUserName",
+  (name, delay = 0) => ({
+    payload: name,
+    meta: { delay },
+  })
+);
+
 export const newMessage = (from, text) => {
   const db = getFirestore(app);
   addDoc(collection(db, "messages"), {

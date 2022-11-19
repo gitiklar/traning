@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { joinRoom } from "../actions";
-import { setUserName } from "./account";
+import { joinRoom, setUserName } from "../actions";
 
 const initialState = {
   activeRoomId: 5,
@@ -25,7 +24,7 @@ export const slice = createSlice({
     },
   },
   extraReducers: {
-    [setUserName]: (state) => {
+    "account/setUserName": (state) => {
       state.activeRoomId = 0;
     },
     ["rooms/joinRoom/fulfilled"]: (state, action) => {
