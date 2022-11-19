@@ -26,3 +26,14 @@ export const freezeMiddleware =
       }
     }
   };
+
+export const delayMiddleware =
+  ({ getState, dispatch }) =>
+  (next) =>
+  (action) => {
+    if (!action.meta) return next(action);
+    const ms = action.meta.delay;
+    setTimeout(() => {
+      next(action);
+    }, ms);
+  };

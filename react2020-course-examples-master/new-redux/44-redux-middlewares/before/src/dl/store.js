@@ -3,7 +3,7 @@ import accountReducer from "./slices/account";
 import messagesReducer from "./slices/messages";
 import roomsReducer from "./slices/rooms";
 import freezeReducer from "./slices/freeze";
-import { freezeMiddleware } from "./middlewares";
+import { delayMiddleware, freezeMiddleware } from "./middlewares";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +12,8 @@ export const store = configureStore({
     rooms: roomsReducer,
     freeze: freezeReducer,
   },
-  middleware: (allDefault) => allDefault().concat(freezeMiddleware),
+  middleware: (allDefault) =>
+    allDefault().concat(freezeMiddleware, delayMiddleware),
 });
 
 window.store = store;
