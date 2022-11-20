@@ -7,13 +7,15 @@ import MessagesCount from "./ui/MessagesCount";
 import Freeze from "./ui/Freeze";
 import FirebaseListener from "./ui/FirebaseListener";
 import Undo from "./ui/Undo";
+import LoadLocalStorage from "./ui/LoadLocalStorage";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <main>
-        <Undo/>
+        <LoadLocalStorage />
+        <Undo />
         <FirebaseListener />
         <Freeze />
         <Banner />

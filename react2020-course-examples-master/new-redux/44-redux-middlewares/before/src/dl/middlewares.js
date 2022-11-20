@@ -1,3 +1,4 @@
+import { loadFromLocalStorage } from "./actions";
 import { addActionToList, clear } from "./slices/freeze";
 import { updateStateArray } from "./slices/undo";
 
@@ -5,6 +6,7 @@ export const freezeMiddleware =
   ({ dispatch, getState }) =>
   (next) =>
   (action) => {
+    if (action.type === loadFromLocalStorage.toString()) return next(action);
     if (action.type === "freeze/setFrozen") {
       next(action);
       if (getState().freeze.isFrozen === false) {
@@ -43,10 +45,23 @@ export const undoMiddleware =
   ({ dispatch, getState }) =>
   (next) =>
   (action) => {
+    if (action.type === loadFromLocalStorage().toString()) return next(action);
     if (!action.type.startsWith("undo")) {
       const lastState = { ...getState() };
       delete lastState.undo;
       dispatch(updateStateArray(lastState));
     }
     return next(action);
+  };
+
+export const localStorageSaving =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    if (action.type !== loadFromLocalStorage().toString()) {
+      next(action);
+      localStorage.setItem("state", JSON.stringify(getState()));
+    } else {
+      return next(action);
+    }
   };

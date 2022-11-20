@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loadFromLocalStorage } from "../actions";
 
 const initialState = {
   statesArray: [],
@@ -13,6 +14,11 @@ const slice = createSlice({
     },
     undoAction: (state, action) => {
       state.statesArray.pop();
+    },
+  },
+  extraReducers: {
+    [loadFromLocalStorage()]: (state, action) => {
+      return action.payload.undo;
     },
   },
 });

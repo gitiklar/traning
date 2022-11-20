@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { joinRoom, setUserName } from "../actions";
+import { joinRoom, loadFromLocalStorage, setUserName } from "../actions";
 import { undoAction } from "./undo";
 
 const initialState = {
@@ -33,6 +33,9 @@ export const slice = createSlice({
     },
     [undoAction]: (state, action) => {
       return action.payload.rooms;
+    },
+    [loadFromLocalStorage()]: (state, action) => {
+      return action.payload.messages;
     },
   },
 });

@@ -8,6 +8,15 @@ import {
 } from "firebase/firestore";
 import { createRoom, enterRoom } from "./slices/rooms";
 
+export function loadFromLocalStorage() {
+  return createAction("localStorage/loadFromLocalStorage", () => {
+    const allState = JSON.parse(localStorage.getItem("state")) || {};
+    return {
+      payload: allState,
+    };
+  });
+}
+
 export const setUserName = createAction(
   "account/setUserName",
   (name, delay = 0) => ({
