@@ -3,7 +3,8 @@ import accountReducer from "./slices/account";
 import messagesReducer from "./slices/messages";
 import roomsReducer from "./slices/rooms";
 import freezeReducer from "./slices/freeze";
-import { delayMiddleware, freezeMiddleware } from "./middlewares";
+import undoReducer from "./slices/undo";
+import { delayMiddleware, freezeMiddleware, undoMiddleware } from "./middlewares";
 
 export const store = configureStore({
   reducer: {
@@ -11,9 +12,10 @@ export const store = configureStore({
     messages: messagesReducer,
     rooms: roomsReducer,
     freeze: freezeReducer,
+    undo: undoReducer,
   },
   middleware: (allDefault) =>
-    allDefault().concat(freezeMiddleware, delayMiddleware),
+    allDefault().concat(freezeMiddleware, delayMiddleware, undoMiddleware),
 });
 
 window.store = store;

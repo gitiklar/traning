@@ -6,7 +6,7 @@ export default function Header() {
   const dispatch = useDispatch();
 
   function handleChange(e) {
-    dispatch(setUserName(e.target.value, 5000));
+    dispatch(setUserName(e.target.value, 0));
   }
 
   return (

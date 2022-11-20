@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { joinRoom, setUserName } from "../actions";
+import { undoAction } from "./undo";
 
 const initialState = {
   activeRoomId: 5,
@@ -29,6 +30,9 @@ export const slice = createSlice({
     },
     ["rooms/joinRoom/fulfilled"]: (state, action) => {
       console.log("full", action);
+    },
+    [undoAction]: (state, action) => {
+      return action.payload.rooms;
     },
   },
 });

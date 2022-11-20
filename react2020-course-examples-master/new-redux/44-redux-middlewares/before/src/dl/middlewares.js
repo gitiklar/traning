@@ -1,4 +1,5 @@
 import { addActionToList, clear } from "./slices/freeze";
+import { updateStateArray } from "./slices/undo";
 
 export const freezeMiddleware =
   ({ dispatch, getState }) =>
@@ -36,4 +37,16 @@ export const delayMiddleware =
     setTimeout(() => {
       next(action);
     }, ms);
+  };
+
+export const undoMiddleware =
+  ({ dispatch, getState }) =>
+  (next) =>
+  (action) => {
+    if (!action.type.startsWith("undo")) {
+      const lastState = { ...getState() };
+      delete lastState.undo;
+      dispatch(updateStateArray(lastState));
+    }
+    return next(action);
   };

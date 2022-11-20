@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { undoAction } from "./undo";
 
 const initialState = {
   name: "guest",
@@ -10,6 +11,9 @@ export const accountSlice = createSlice({
   extraReducers: {
     "account/setUserName": (state, action) => {
       state.name = action.payload;
+    },
+    [undoAction]: (state, action) => {
+      return action.payload.account;
     },
   },
 });

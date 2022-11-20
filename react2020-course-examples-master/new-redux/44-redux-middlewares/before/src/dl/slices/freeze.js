@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { undoAction } from "./undo";
 
 const initialState = {
   isFrozen: false,
@@ -17,6 +18,11 @@ const slice = createSlice({
     },
     clear(state, action) {
       state.actions = [];
+    },
+  },
+  extraReducers: {
+    [undoAction]: (state, action) => {
+     return action.payload.freeze;
     },
   },
 });

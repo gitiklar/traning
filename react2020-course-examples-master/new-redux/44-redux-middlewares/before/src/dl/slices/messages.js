@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { undoAction } from "./undo";
 
 const initialState = {
   messages: [],
@@ -10,6 +11,11 @@ export const slice = createSlice({
   reducers: {
     updateMessages(state, action) {
       state.messages = action.payload;
+    },
+  },
+  extraReducers: {
+    [undoAction]: (state, action) => {
+      return action.payload.messages;
     },
   },
 });
