@@ -6,7 +6,6 @@ export const freezeMiddleware =
   ({ dispatch, getState }) =>
   (next) =>
   (action) => {
-    if (action.type === loadFromLocalStorage.toString()) return next(action);
     if (action.type === "freeze/setFrozen") {
       next(action);
       if (getState().freeze.isFrozen === false) {
